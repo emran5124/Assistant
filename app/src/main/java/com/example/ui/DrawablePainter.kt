@@ -15,7 +15,7 @@ class DrawablePainter(private val drawable: Drawable) : Painter() {
             Size.Unspecified
         }
 
-    override fun DrawScope.draw() {
+    override fun DrawScope.onDraw() {
         drawIntoCanvas { canvas ->
             val prevBounds = drawable.bounds
             drawable.setBounds(0, 0, size.width.toInt(), size.height.toInt())

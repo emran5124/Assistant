@@ -78,7 +78,7 @@ class LauncherPreferences(private val context: Context) {
         context.dataStore.edit { preferences ->
             val currentHistoryString = preferences[KEY_LAUNCH_HISTORY] ?: ""
             val currentMap = if (currentHistoryString.isEmpty()) {
-                emptyMap()
+                mutableMapOf<String, Long>()
             } else {
                 currentHistoryString.split(",")
                     .mapNotNull {

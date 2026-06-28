@@ -216,7 +216,7 @@ fun SelectionScreen(
                                 .testTag("select_all_button"),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                colorContent = MaterialTheme.colorScheme.onSecondaryContainer
+                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                             )
                         ) {
                             Icon(Icons.Default.SelectAll, contentDescription = null)
@@ -231,7 +231,7 @@ fun SelectionScreen(
                                 .testTag("deselect_all_button"),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = MaterialTheme.colorScheme.errorContainer,
-                                colorContent = MaterialTheme.colorScheme.onErrorContainer
+                                contentColor = MaterialTheme.colorScheme.onErrorContainer
                             )
                         ) {
                             Icon(Icons.Default.Deselect, contentDescription = null)
