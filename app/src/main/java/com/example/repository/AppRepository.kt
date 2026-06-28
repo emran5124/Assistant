@@ -56,6 +56,25 @@ class AppRepository(
         appsList
     }
 
+    // Directly fetch AppInfo for a list of packages. Extremely fast for showing favorite apps instantly.
+    suspend fun getAppInfosForPackages(packages: List<String>): List<AppInfo> = withContext(Dispatchers.IO) {
+        packages.mapNotNull { packageName ->
+            try {
+                val packageInfo = packageManager.getPackageInfo(packageName, 0)
+                val appInfo = packageInfo.applicationInfo ?: return@mapNotNull null
+                val label = appInfo.loadLabel(packageManager).toString()
+                AppInfo(
+                    packageName = packageName,
+                    label = label,
+                    firstInstallTime = packageInfo.firstInstallTime,
+                    lastUpdateTime = packageInfo.lastUpdateTime
+                )
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
     // Resolve an app's icon lazily from PackageManager
     fun getAppIcon(packageName: String): android.graphics.drawable.Drawable? {
         return try {

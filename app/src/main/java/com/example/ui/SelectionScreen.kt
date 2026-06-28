@@ -344,7 +344,14 @@ fun SelectionAppRow(
     getIcon: () -> Drawable?,
     modifier: Modifier = Modifier
 ) {
-    val appIcon = remember(app.packageName) { getIcon() }
+    var appIcon by remember(app.packageName) { mutableStateOf<Drawable?>(null) }
+
+    LaunchedEffect(app.packageName) {
+        val icon = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            getIcon()
+        }
+        appIcon = icon
+    }
 
     Row(
         modifier = modifier
@@ -364,9 +371,10 @@ fun SelectionAppRow(
                 .padding(4.dp),
             contentAlignment = Alignment.Center
         ) {
-            if (appIcon != null) {
+            val icon = appIcon
+            if (icon != null) {
                 androidx.compose.foundation.Image(
-                    painter = DrawablePainter(appIcon),
+                    painter = DrawablePainter(icon),
                     contentDescription = app.label,
                     modifier = Modifier.fillMaxSize()
                 )
@@ -416,7 +424,14 @@ fun ReorderAppRow(
     getIcon: () -> Drawable?,
     modifier: Modifier = Modifier
 ) {
-    val appIcon = remember(app.packageName) { getIcon() }
+    var appIcon by remember(app.packageName) { mutableStateOf<Drawable?>(null) }
+
+    LaunchedEffect(app.packageName) {
+        val icon = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            getIcon()
+        }
+        appIcon = icon
+    }
 
     Row(
         modifier = modifier
@@ -441,9 +456,10 @@ fun ReorderAppRow(
                 .padding(4.dp),
             contentAlignment = Alignment.Center
         ) {
-            if (appIcon != null) {
+            val icon = appIcon
+            if (icon != null) {
                 androidx.compose.foundation.Image(
-                    painter = DrawablePainter(appIcon),
+                    painter = DrawablePainter(icon),
                     contentDescription = app.label,
                     modifier = Modifier.fillMaxSize()
                 )

@@ -104,14 +104,10 @@ class LauncherViewModel(
 
     // Get favorite applications to display inside the Popup, filtered by popup search query if any
     val favoriteAppsInPopup: StateFlow<List<AppInfo>> = combine(
-        _installedApps,
         favorites,
-        launchHistory,
         _popupSearchQuery
-    ) { apps, favs, history, query ->
-        val favApps = favs.mapNotNull { favPkg ->
-            apps.find { it.packageName == favPkg }
-        }
+    ) { favs, query ->
+        val favApps = repository.getAppInfosForPackages(favs)
         if (query.isBlank()) {
             favApps
         } else {
