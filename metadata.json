@@ -1,0 +1,6 @@
+{
+  "name": "Popup Launcher",
+  "description": "An ultra-lightweight, battery-efficient app launcher that starts with an inside-app floating dialog containing your favorite apps, leaving absolutely no background footprint.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
